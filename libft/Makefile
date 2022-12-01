@@ -6,7 +6,7 @@
 #    By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 13:16:56 by afrigger          #+#    #+#              #
-#    Updated: 2022/11/24 10:44:04 by afrigger         ###   ########.fr        #
+#    Updated: 2022/12/01 13:32:18 by afrigger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ CFLAGS = -Wall -Wextra -Werror -I.
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(BONUS_OBJS)
+		ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
