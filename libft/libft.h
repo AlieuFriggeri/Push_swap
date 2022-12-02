@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:26:05 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/01 15:15:32 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:02:04 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 
 typedef struct s_list
 {
-	int				content;
+	void			*content;
 	struct s_list	*next;
+	struct s_list	*top;
+	struct s_list	*bot;
 }	t_list;
 
 int		ft_isalpha(int c);
