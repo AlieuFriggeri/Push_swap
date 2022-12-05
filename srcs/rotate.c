@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 11:10:39 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/05 18:49:20 by afrigger         ###   ########.fr       */
+/*   Created: 2022/12/05 18:05:54 by afrigger          #+#    #+#             */
+/*   Updated: 2022/12/05 18:52:31 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../headers/push_swap.h"
 
-# include "../libft/libft.h"
+void	revrotate_a(t_list **pile_a)
+{
+	t_list *first;
+	t_list *last;
+	t_list *tmp;
 
-void	lol(char *str);
-void	swap_a(t_list *pile_a);
-void	push_a(t_list **pile_a, t_list **pile_b);
-void	printlist(t_list **pile_a, t_list **pile_b);
-void	delete(t_list **root);
-void	push_b(t_list **pile_b, t_list **pile_a);
-void	revrotate_a(t_list **pile_a);
-
-#endif
+	if (!pile_a)
+		return;
+	last = *pile_a;
+	while (last->next != NULL)
+	{
+		if (last->next->next == NULL)
+			tmp = last;
+		last = last->next;
+	}
+	first = *pile_a;
+	ft_printf("first is %d\n last is %d\n", first->content, last->content);
+	last->next = first;
+	*pile_a = last;
+}

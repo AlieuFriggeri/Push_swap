@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/05 17:14:25 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:49:43 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,34 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 	int i;
 	
 	i = 0;
-	tmp = *pile_a;
-	if (!pile_a || !pile_b)
+	if (*pile_a)
 	{
-		ft_printf("error with list occured");
-		return;
-	}
-	ft_printf("pile a = \n");
-	while(tmp->next != NULL)
-	{
-		ft_printf("%d: {%d}\n", i, tmp->content);
-		if (tmp->next != NULL)
-			tmp = tmp->next;
-		else
-			break;
-		i++;
+		tmp = *pile_a;
+		ft_printf("pile a = \n");
+		while(tmp != NULL)
+		{
+			ft_printf("%d: {%d}\n", i, tmp->content);
+			if (tmp->next != NULL)
+				tmp = tmp->next;
+			else
+				break;
+			i++;
+		}
 	}
 	i = 0;
-	tmp = *pile_b;
-	ft_printf("pile b = \n");
-	while(tmp->next != NULL)
+	if(*pile_b)
 	{
-		ft_printf("%d: {%d}\n", i, tmp->content);
-		if (tmp->next != NULL)
-			tmp = tmp->next;
-		else
-			break ;
-		i++;
+		tmp = *pile_b;
+		ft_printf("pile b = \n");
+		while(tmp != NULL)
+		{
+			ft_printf("%d: {%d}\n", i, tmp->content);
+			if (tmp->next != NULL)
+				tmp = tmp->next;
+			else
+				break ;
+			i++;
+		}
 	}
 }
 
@@ -89,8 +90,7 @@ int main()
 	ft_lstadd_back(&pile_b, ft_lstnew((int *)12));
 	ft_lstadd_back(&pile_b, ft_lstnew((int *)13));
 	printlist(&pile_a, &pile_b);
-	push_a(&pile_a, &pile_b);
-	push_a(&pile_a, &pile_b);
+	revrotate_a(&pile_a);
 	printlist(&pile_a, &pile_b);
 	return 0;
 }
