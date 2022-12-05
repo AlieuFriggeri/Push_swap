@@ -6,7 +6,7 @@
 #    By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 12:10:58 by afrigger          #+#    #+#              #
-#    Updated: 2022/12/01 13:31:16 by afrigger         ###   ########.fr        #
+#    Updated: 2022/12/02 13:59:43 by afrigger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FT_LNK = -L ${DIR_LIBFT} -l ft
 
 LIBS = $(FT_LNK) 
 
-SRCS_LIST = push_swap.c sa.c
+SRCS_LIST = push_swap.c swap.c push.c
 
 SRCS = $(addprefix $(DIR_S), $(SRCS_LIST))
 
@@ -45,7 +45,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(GREY) ______   __  __     ______     __  __     ______     __     __     ______     ______ $(RESET)"
 	@echo "$(RED)/\  == \ /\ \/\ \   /\  ___\   /\ \_\ \   /\  ___\   /\ \  _ \ \   /\  __ \   /\  == \ $(RESET)"
 	@echo "$(RED)\ \  _-/ \ \ \_\ \  \ \___  \  \ \  __ \  \ \___  \  \ \ \/  .\ \  \ \  __ \  \ \  _-/ $(RESET)"
-	@echo "$(RED) \ \_\    \ \_____\  \/\_____\  \ \_\ \_\  \/\_____\  \ \__/\_ \  \ \_\ \_\ \  \_\ \ $(RESET)"
+	@echo "$(RED) \ \_\    \ \_____\  \/\_____\  \ \_\ \_\  \/\_____\  \ \__/\_ \ \  \_\ \_\ \  \_\ \ $(RESET)"
 	@echo "$(GREY)  \/_/     \/_____/   \/_____/   \/_/\/_/   \/_____/   \/_/   \/_/   \/_/\/_/   \/_/ $(RESET)"
 	@echo "$(BLUE)                                                                                       $(RESET)"
 	${CC} ${LIBS} ${OBJS} -o ${NAME}
