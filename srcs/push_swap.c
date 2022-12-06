@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/05 18:49:43 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:52:29 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 			i++;
 		}
 	}
+	ft_printf("[END OF LIST]\n");
+}
+
+void	parse_arg(t_list **pile_a, char **argv, int argc)
+{
+
 }
 
 int main()
@@ -79,9 +85,7 @@ int main()
 
 	pile_a = malloc(sizeof(t_list));
 	pile_b = malloc(sizeof(t_list));
-	pile_a->content = malloc(sizeof(int));
 	pile_a->content = (int *)1;
-	pile_b->content = malloc(sizeof(int));
 	pile_b->content = (int *)10;
 	ft_lstadd_back(&pile_a, ft_lstnew((int *)2));
 	ft_lstadd_back(&pile_a, ft_lstnew((int *)3));
@@ -89,8 +93,6 @@ int main()
 	ft_lstadd_back(&pile_b, ft_lstnew((int *)11));
 	ft_lstadd_back(&pile_b, ft_lstnew((int *)12));
 	ft_lstadd_back(&pile_b, ft_lstnew((int *)13));
-	printlist(&pile_a, &pile_b);
-	revrotate_a(&pile_a);
 	printlist(&pile_a, &pile_b);
 	return 0;
 }
