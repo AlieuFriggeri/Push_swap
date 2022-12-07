@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/07 13:39:09 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:53:40 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		}
 	}
 	i = 0;
-	ft_printf("transfer\n");
 	if(*pile_b)
 	{
 		tmp = *pile_b;
@@ -154,13 +153,12 @@ int main(int argc, char **argv)
 {
 	t_list *pile_a;
 	t_list *pile_b;
-	//(void)argv;
-	//(void)argc;
+	
 	pile_a = ft_lstnew(0);
 	pile_b = ft_lstnew(0);
 	parse_arg(&pile_a, argv, argc);
+	printlist(&pile_a, &pile_b);
 	sort_sale(&pile_a, &pile_b);
-	//ft_printf("content is %d\n", *(int *)pile_b->content);
 	printlist(&pile_a, &pile_b);
 	return 0;
 }
