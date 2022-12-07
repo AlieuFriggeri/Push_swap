@@ -6,22 +6,22 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/06 16:32:05 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:39:09 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	delete(t_list **root)
+void	delete(void *root)
 {
 	t_list *tmp;
 	t_list *tmp2;
 
 	if (root == NULL)
 		return;
-	tmp = *root;
-	tmp2 = *root;
-	*root = tmp->next;
+	tmp = root;
+	tmp2 = root;
+	root = tmp->next;
 	free(tmp2);
 	// tmp = *root;
 	// 	while (tmp->content != value)
@@ -47,7 +47,8 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		ft_printf("pile a = \n");
 		while(tmp != NULL)
 		{
-			ft_printf("%d: {%d}\n", i, tmp->content);
+			if (tmp->content)
+				ft_printf("%d: {%d}\n", i, *(int *)tmp->content);
 			if (tmp->next != NULL)
 				tmp = tmp->next;
 			else
@@ -56,13 +57,15 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		}
 	}
 	i = 0;
+	ft_printf("transfer\n");
 	if(*pile_b)
 	{
 		tmp = *pile_b;
 		ft_printf("pile b = \n");
 		while(tmp != NULL)
 		{
-			ft_printf("%d: {%d}\n", i, tmp->content);
+			if(tmp->content)
+				ft_printf("%d: {%d}\n", i, *(int *)tmp->content);
 			if (tmp->next != NULL)
 				tmp = tmp->next;
 			else
@@ -73,26 +76,27 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 	ft_printf("[END OF LIST]\n");
 }
 
-void	setlist(t_list **pile_a, char **numbers)
+void	setlist(t_list **pile_a, char **numbers, int index)
 {
 	t_list	*tmp;
 	int		nb;
 	int		i;
 
 	tmp = *pile_a;
-	i = 1;
+	i = index;
 	while(numbers[i])
 	{
 		nb = ft_atoi(numbers[i]);
-		if (checkdouble(pile_a, nb) == 1 ||
+		if (checkdouble(numbers) == 1 ||
 			ft_strncmp(ft_itoa(nb), numbers[i], ft_strlen(ft_itoa(nb))) != 0)
 			{
 				ft_putstr_fd("Error\n", 2);
-				//ft_lstclear(pile_a, &delete);
-				return;
+				ft_lstclear(pile_a, &delete);
+				exit(1);
 			}
-			ft_printf("content is %d\n", tmp->content);
-		tmp->content = &nb; // probleme d-assignation a regler
+		tmp->content = malloc(sizeof(int));
+		*((int *)tmp->content) = nb;
+		if (nb == *((int *)tmp->content))
 		tmp->next = ft_lstnew(0);
 		tmp = tmp->next;
 		i++;
@@ -100,21 +104,24 @@ void	setlist(t_list **pile_a, char **numbers)
 	tmp->next = NULL;
 }
 
-int	checkdouble(t_list **pile_a, int nb)
+int	checkdouble(char **numbers)
 {
-	t_list	*tmp;
+	int i;
+	int j;
 
-	tmp = *pile_a;
-	if (tmp->content)
+	i = 0;
+	j = 0;
+	while(numbers[i])
 	{
-		while (tmp != NULL)
-		{ //c ici le illegal ou le segfault
-			if (&nb == tmp->content)
+		while (numbers[j])
+		{
+			if (ft_strncmp(numbers[j], numbers[i], ft_strlen(numbers[i])) == 0
+				&& j != i && ft_strlen(numbers[i]) == ft_strlen(numbers[j]))
 				return (1);
-			if (tmp->next == NULL)
-				return(0);
-			tmp = tmp->next;
+			j++;
 		}
+		j = 0;
+		i++;
 	}
 	return (0);
 }
@@ -122,21 +129,24 @@ int	checkdouble(t_list **pile_a, int nb)
 void	parse_arg(t_list **pile_a, char **argv, int argc)
 {
 	char **numbers;
+	int index;
 
 	if (argc <= 1)
 	{
 		ft_putstr_fd("Error\n", 2);
-		return;
+		exit(1);
 	}
 	else if (argc == 2)
 	{
 		numbers = ft_split(argv[1], ' ');
-		setlist(pile_a, numbers);
+		index = 0;
+		setlist(pile_a, numbers, index);
 	}
 	else
 	{
 		numbers = argv;
-		setlist(pile_a, numbers);
+		index = 1;
+		setlist(pile_a, numbers, index);
 	}
 }
 
@@ -144,25 +154,13 @@ int main(int argc, char **argv)
 {
 	t_list *pile_a;
 	t_list *pile_b;
-	int nb = 12;
-	//int * num = &nb;
-
-	pile_a = ft_lstnew((int *)1);
-	pile_b = ft_lstnew((int *)2);
-	(void)argc;
-	(void)argv;
+	//(void)argv;
+	//(void)argc;
+	pile_a = ft_lstnew(0);
+	pile_b = ft_lstnew(0);
 	parse_arg(&pile_a, argv, argc);
-	ft_printf("content is %d\n", pile_a->content);
-	pile_a->content = &nb;
-	ft_printf("content is %d\n", *(int *)pile_a->content);
-	// pile_a->content = (int *)1;
-	// pile_b->content = (int *)10;
-	// ft_lstadd_back(&pile_a, ft_lstnew((int *)2));
-	// ft_lstadd_back(&pile_a, ft_lstnew((int *)3));
-	// ft_lstadd_back(&pile_a, ft_lstnew((int *)4));
-	// ft_lstadd_back(&pile_b, ft_lstnew((int *)11));
-	// ft_lstadd_back(&pile_b, ft_lstnew((int *)12));
-	// ft_lstadd_back(&pile_b, ft_lstnew((int *)13));
+	sort_sale(&pile_a, &pile_b);
+	//ft_printf("content is %d\n", *(int *)pile_b->content);
 	printlist(&pile_a, &pile_b);
 	return 0;
 }

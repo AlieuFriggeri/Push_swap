@@ -6,7 +6,7 @@
 #    By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 12:10:58 by afrigger          #+#    #+#              #
-#    Updated: 2022/12/05 18:15:52 by afrigger         ###   ########.fr        #
+#    Updated: 2022/12/07 13:11:19 by afrigger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FT_LNK = -L ${DIR_LIBFT} -l ft
 
 LIBS = $(FT_LNK) 
 
-SRCS_LIST = push_swap.c swap.c push.c rotate.c
+SRCS_LIST = push_swap.c swap.c push.c rotate.c sort.c
 
 SRCS = $(addprefix $(DIR_S), $(SRCS_LIST))
 

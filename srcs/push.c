@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:32:40 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/05 18:05:38 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:18:43 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	push_a(t_list **pile_a, t_list **pile_b)
 	tmp = *pile_b;
 	*pile_b = tmp->next;
 	ft_lstadd_front(pile_a, tmp);
+	ft_printf("pa\n");
 }
 void	push_b(t_list **pile_b, t_list **pile_a)
 {
@@ -31,4 +32,5 @@ void	push_b(t_list **pile_b, t_list **pile_a)
 	tmp = *pile_a;
 	*pile_a = tmp->next;
 	ft_lstadd_front(pile_b, tmp);
+	ft_printf("pb\n");
 }
