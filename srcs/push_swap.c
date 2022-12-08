@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/07 14:53:40 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:40:08 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		{
 			if (tmp->content)
 				ft_printf("%d: {%d}\n", i, *(int *)tmp->content);
+			else
+				ft_printf("%d: {%d}\n", i, tmp->content);
 			if (tmp->next != NULL)
 				tmp = tmp->next;
 			else
@@ -65,6 +67,8 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		{
 			if(tmp->content)
 				ft_printf("%d: {%d}\n", i, *(int *)tmp->content);
+			else
+				ft_printf("%d: {%d}\n", i, tmp->content);
 			if (tmp->next != NULL)
 				tmp = tmp->next;
 			else
@@ -100,7 +104,7 @@ void	setlist(t_list **pile_a, char **numbers, int index)
 		tmp = tmp->next;
 		i++;
 	}
-	tmp->next = NULL;
+	tmp = NULL;
 }
 
 int	checkdouble(char **numbers)
@@ -154,11 +158,9 @@ int main(int argc, char **argv)
 	t_list *pile_a;
 	t_list *pile_b;
 	
-	pile_a = ft_lstnew(0);
-	pile_b = ft_lstnew(0);
+	pile_a = malloc(sizeof(t_list));
+	pile_b = malloc(sizeof(t_list));
 	parse_arg(&pile_a, argv, argc);
-	printlist(&pile_a, &pile_b);
 	sort_sale(&pile_a, &pile_b);
-	printlist(&pile_a, &pile_b);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 18:05:54 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/07 13:28:28 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:30:50 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ void	rotate_a(t_list **pile_a, int mode)
 	*pile_a = tmp->next;
 	tmp->next = NULL;
 	last = ft_lstlast(*pile_a);
-	last->next = tmp;
+	if (last->content == NULL)
+	{
+		last->content = tmp->content;
+		last->next = NULL;
+		//ft_printf("last content is %d\n", last->content);
+	}
+	else
+		last->next = tmp;
 	if (mode == 1)
 		ft_printf("ra\n");
 }
@@ -35,7 +42,14 @@ void	rotate_b(t_list **pile_b, int mode)
 	*pile_b = tmp->next;
 	tmp->next = NULL;
 	last = ft_lstlast(*pile_b);
-	last->next = tmp;
+	if (last->content == NULL)
+	{
+		last->content = tmp->content;
+		last->next = NULL;
+		//ft_printf("last content is %d\n", last->content);
+	}
+	else
+		last->next = tmp;
 	if (mode == 1)
 		ft_printf("rb\n");
 }
