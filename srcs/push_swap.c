@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/08 11:40:08 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:10:31 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,21 +143,46 @@ void	parse_arg(t_list **pile_a, char **argv, int argc)
 	{
 		numbers = ft_split(argv[1], ' ');
 		index = 0;
-		setlist(pile_a, numbers, index);
 	}
 	else
 	{
 		numbers = argv;
 		index = 1;
-		setlist(pile_a, numbers, index);
 	}
+	checkdigit(numbers);
+	setlist(pile_a, numbers, index);
+}
+
+int	checkdigit(char **str)
+{
+	int i;
+	int j;
+
+	i = 1;
+	j = 0;
+	while(str[i])
+	{
+		while (str[i][j])
+		{
+			if (ft_isdigit(str[i][j]) == 1 || str[i][j] == '-')
+				j++;
+			else
+			{
+				ft_putstr_fd("Error\n" ,2);
+				exit (1);
+			}
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
 	t_list *pile_a;
 	t_list *pile_b;
-	
+
 	pile_a = malloc(sizeof(t_list));
 	pile_b = malloc(sizeof(t_list));
 	parse_arg(&pile_a, argv, argc);

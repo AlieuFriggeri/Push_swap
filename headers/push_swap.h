@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:39 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/07 13:24:26 by afrigger         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:00:58 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	parse_arg(t_list **pile_a, char **argv, int argc);
 int		checkdouble(char **numbers);
 void	setlist(t_list **pile_a, char **numbers, int index);
 void	sort_sale(t_list **pile_a, t_list **pile_b);
+int		checkdigit(char **str);
 
 #endif
