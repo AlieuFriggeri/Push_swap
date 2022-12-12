@@ -3,28 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+         #
+#    By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/03 12:10:58 by afrigger          #+#    #+#              #
-#    Updated: 2022/12/07 13:11:19 by afrigger         ###   ########.fr        #
+#    Created: 2022/10/31 18:49:40 by vgroux            #+#    #+#              #
+#    Updated: 2022/12/06 19:28:47 by vgroux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 GREENGREEN = \033[38;5;46m
 RED = \033[0;31m
-BLUE = \033[0;34m
 GREY = \033[38;5;240m
 RESET = \033[0m
 
-NAME = push_swap
+NAME =     push_swap
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3 -g
-RM = rm -f
+CC =         gcc
+CFLAGS =     -Wall -Wextra -Werror
+RM =         rm -rf
 
 DIR_H = headers/
 DIR_S =	srcs/
+CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
+
+SRCS_LIST =	push_swap.c sort.c push.c rotate.c swap.c
+
+SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
+
+OBJS =		${SRCS:${DIR_S}%.c=${DIR_O}%.o}
 
 # Compile la Libft
 DIR_LIBFT = libft/
@@ -32,45 +39,62 @@ LIBFT_INC = -I ${DIR_LIBFT}
 LIBFT =	${DIR_LIBFT}libft.a
 FT_LNK = -L ${DIR_LIBFT} -l ft
 
+LIBS = ${FT_LNK} 
 
-LIBS = $(FT_LNK) 
+# ${NAME}: title ${LIBFT} ${MLX} ${OBJS}
+${NAME}: ${LIBFT} ${MLX} ${OBJS}
+	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: $(NAME) Objects were created${GREY}"
+	${CC} ${OBJS} ${LIBS} -o ${NAME}
+	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: $(NAME) created !"
 
-SRCS_LIST = push_swap.c swap.c push.c rotate.c sort.c
+title:
+	@echo "$(GREENGREEN) ██████╗██████╗  █████╗  ██████╗████████╗    ██████╗ ██╗$(RESET)"
+	@echo "$(GREENGREEN) ██╔════╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝   ██╔═══██╗██║$(RESET)"
+	@echo "$(GREENGREEN) █████╗  ██████╔╝███████║██║        ██║█████╗██║   ██║██║$(RESET)"
+	@echo "$(GREENGREEN) ██╔══╝  ██╔══██╗██╔══██║██║        ██║╚════╝██║   ██║██║$(RESET)"
+	@echo "$(GREENGREEN) ██║     ██║  ██║██║  ██║╚██████╗   ██║      ╚██████╔╝███████╗$(RESET)"
+	@echo "$(GREENGREEN) ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝       ╚═════╝ ╚══════╝$(RESET)"
 
-SRCS = $(addprefix $(DIR_S), $(SRCS_LIST))
+${LIBFT}:
+	@echo "[$(GREENGREEN)${NAME}$(RESET)]: Creating Libft...${GREY}"
+	${MAKE} -sC ${@D}
+	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: Libft Objects were created"
 
-OBJS = $(SRCS:$(DIR_S)%.c=$(DIR_O)%.o)
+${MLX}:
+	@echo "[$(GREENGREEN)${NAME}$(RESET)]: Creating MLX...$(GREY)"
+	${MAKE} -sC ${@D}
+	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: MLX Objects were created"
+	@echo "${RESET}[$(GREENGREEN)${NAME}$(RESET)]: Creating Fractol Objects...${GREY}"
 
-$(NAME): $(LIBFT) $(OBJS)
-	@echo "$(GREY) ______   __  __     ______     __  __     ______     __     __     ______     ______ $(RESET)"
-	@echo "$(RED)/\  == \ /\ \/\ \   /\  ___\   /\ \_\ \   /\  ___\   /\ \  _ \ \   /\  __ \   /\  == \ $(RESET)"
-	@echo "$(RED)\ \  _-/ \ \ \_\ \  \ \___  \  \ \  __ \  \ \___  \  \ \ \/  .\ \  \ \  __ \  \ \  _-/ $(RESET)"
-	@echo "$(RED) \ \_\    \ \_____\  \/\_____\  \ \_\ \_\  \/\_____\  \ \__/\_ \ \  \_\ \_\ \  \_\ \ $(RESET)"
-	@echo "$(GREY)  \/_/     \/_____/   \/_____/   \/_/\/_/   \/_____/   \/_/   \/_/   \/_/\/_/   \/_/ $(RESET)"
-	@echo "$(BLUE)                                                                                       $(RESET)"
-	${CC} ${LIBS} ${OBJS} -o ${NAME}
-
-$(LIBFT):
-	$(MAKE) -sC $(@D)
-
-all: $(NAME)
+all: ${NAME}
 
 ${DIR_O}%.o:${DIR_S}%.c
-	${CC} ${CFLAGS} -I ${DIR_H} ${LIBFT_INC} -o $@ -c $<
+	@printf "\033[38;5;240m"
+	@mkdir -p ${DIR_O}
+	${CC} ${CFLAGS} ${LIBFT_INC} ${MLX_INC} -I ${DIR_H} -o $@ -c $<
 
 clean:
-	@echo "$(RED)╔═╗╔═╗╔═╗╔╦╗╔╗ ╦ ╦╔═╗$(RESET)"
-	@echo "$(RED)║ ╦║ ║║ ║ ║║╠╩╗╚╦╝║╣$(RESET)"
-	@echo "$(RED)╚═╝╚═╝╚═╝═╩╝╚═╝ ╩ ╚═╝$(RESET)"
-	$(RM) $(OBJS)
+	@echo "$(RED) ██████╗██╗     ███████╗ █████╗ ███╗   ██╗██╗███╗   ██╗ ██████╗$(RESET)"
+	@echo "$(RED) ██╔════╝██║     ██╔════╝██╔══██╗████╗  ██║██║████╗  ██║██╔════╝$(RESET)"
+	@echo "$(RED) ██║     ██║     █████╗  ███████║██╔██╗ ██║██║██╔██╗ ██║██║  ███╗$(RESET)"
+	@echo "$(RED) ██║     ██║     ██╔══╝  ██╔══██║██║╚██╗██║██║██║╚██╗██║██║   ██║$(RESET)"
+	@echo "$(RED) ╚██████╗███████╗███████╗██║  ██║██║ ╚████║██║██║ ╚████║╚██████╔╝$(RESET)"
+	@echo "$(RED)  ╚═════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝ $(RESET)"
+	@echo "[$(RED)${NAME}$(RESET)]: Cleaning $(NAME) Objects...${GREY}"
+	${RM} ${OBJS}
+	${RM} ${DIR_O}
+	@echo "[$(RED)${NAME}$(RESET)]: $(NAME) Objects were cleaned${GREY}"
 
 libclean:
-	@echo "Clean de libft"
+	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cleaning Libft...${GREY}"
 	${MAKE} -sC ${DIR_LIBFT} fclean
-	
+	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Libft Objects were cleaned"
+
 fclean: clean libclean
+	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cleaning $(NAME)...${GREY}"
 	${RM} ${NAME}
+	@echo "${RESET}[$(RED)${NAME}$(RESET)]: $(NAME) Executable was cleaned"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re title libclean 

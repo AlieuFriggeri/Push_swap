@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 
-void	lol(char *str);
 void	swap_a(t_list *pile_a, int mode);
 void	swap_b(t_list *pile_b, int mode);
 void	push_a(t_list **pile_a, t_list **pile_b);
@@ -33,5 +32,6 @@ int		checkdouble(char **numbers);
 void	setlist(t_list **pile_a, char **numbers, int index);
 void	sort_sale(t_list **pile_a, t_list **pile_b);
 int		checkdigit(char **str);
+int	checksort(t_list *pile);
 
 #endif

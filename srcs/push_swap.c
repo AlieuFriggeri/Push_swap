@@ -99,8 +99,8 @@ void	setlist(t_list **pile_a, char **numbers, int index)
 			}
 		tmp->content = malloc(sizeof(int));
 		*((int *)tmp->content) = nb;
-		if (nb == *((int *)tmp->content))
-		tmp->next = ft_lstnew(0);
+		if (numbers[i + 1])
+			tmp->next = ft_lstnew(0);
 		tmp = tmp->next;
 		i++;
 	}
@@ -158,13 +158,13 @@ int	checkdigit(char **str)
 	int i;
 	int j;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	while(str[i])
 	{
 		while (str[i][j])
 		{
-			if (ft_isdigit(str[i][j]) == 1 || str[i][j] == '-')
+			if (ft_isdigit(str[i][j]) == 1 || (str[i][j] == '-' && j == 0))
 				j++;
 			else
 			{
@@ -187,5 +187,7 @@ int main(int argc, char **argv)
 	pile_b = malloc(sizeof(t_list));
 	parse_arg(&pile_a, argv, argc);
 	sort_sale(&pile_a, &pile_b);
+	//printlist(&pile_a, &pile_b);
+	//ft_printf("END OF EXECUTION\n");
 	return 0;
 }

@@ -10,7 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../headers/push_swap.h"
+
+int	checksort(t_list *pile)
+{
+	int i;
+	int j;
+	t_list *tmp;
+
+	tmp = pile;
+	j = 0;
+	while (tmp != NULL)
+	{
+		i = *(int *)tmp->content;
+		if (i < j)
+			return 1;
+		j = i;
+		tmp = tmp->next;
+	}
+	return 0;
+}
 
 void	sort_sale(t_list **pile_a, t_list **pile_b)
 {
@@ -19,38 +38,39 @@ void	sort_sale(t_list **pile_a, t_list **pile_b)
 
 	if (ft_lstsize(*pile_a) <= 2)
 		return;
-	//printlist(pile_a, pile_b);
+	if (checksort(*pile_a) == 0)
+		return;
 	while (*pile_a)
 		push_b(pile_b, pile_a);
 	// SI TMP->CONTENT NON MALLOC CA SEGFAULT LORS DE COMPARAISON AVEC INT	
 	tmp = *pile_b;
-	
 	while (*pile_b)
 	{
 		tmp = *pile_b;
+		if (!tmp->content)
+			break;
 		max = -2147483648;
 		while (tmp->content)
-		{
+		{	
 			if (*((int *)tmp->content) >= max) // segfault a cette ligne
 				max = *(int *)tmp->content;
 			if (!tmp->next)
 				break ;
 			tmp = tmp->next;
 		}
-		//printlist(pile_a, pile_b);
 		tmp = *pile_b;
-		//ft_printf("max is %d\n", max);
 		while (*((int *)tmp->content) != max)
 		{
 			tmp = *pile_b;
 			if (*((int *)tmp->content) == max)
 				break ;
 			//ft_printf("tmp loop is %d\n", *(int *)tmp->content);
-			rotate_b(pile_b, 1);	
+			revrotate_b(pile_b, 1);	
 		}
 		push_a(pile_a, pile_b);
+		//ft_printf("b is %d\n", *(int *)tmp->content);
 		//printlist(pile_a, pile_b);
 	}
-	printlist(pile_a, pile_b);
-	ft_printf("max is %d\n", max);
+	//printlist(pile_a, pile_b);
+	//ft_printf("max is %d\n", max);
 }

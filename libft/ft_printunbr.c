@@ -36,7 +36,7 @@ int	ft_printunbr(unsigned int n)
 		ft_printnbr(n / 10);
 		ft_printchar(n % 10 + 48);
 	}
-	if (n <= 9 && n >= 0)
+	if (n <= 9)
 		ft_printchar(n + 48);
 	return (ft_len(n));
 }

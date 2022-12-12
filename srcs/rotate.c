@@ -61,11 +61,20 @@ void	revrotate_a(t_list **pile_a, int mode)
 
 	tmp = *pile_a;
 	last = ft_lstlast(*pile_a);
-	while (tmp->next->next != NULL)
+	while (tmp->next->content != last->content)
 		tmp = tmp->next;
-	tmp->next = NULL;
-	last->next = *pile_a;
-	*pile_a = last;
+	if (!last->content)
+	{
+		last->content = tmp->content;
+		tmp->next = NULL;
+		last->next = *pile_a;
+		*pile_a = last;
+	}
+	else
+	{
+		tmp->next = NULL;
+		ft_lstadd_front(pile_a, last);
+	}
 	if (mode == 1)
 		ft_printf("rra\n");
 }
@@ -77,11 +86,21 @@ void	revrotate_b(t_list **pile_b, int mode)
 
 	tmp = *pile_b;
 	last = ft_lstlast(*pile_b);
-	while (tmp->next->next != NULL)
+	while (tmp->next->content != last->content)
 		tmp = tmp->next;
-	tmp->next = NULL;
-	last->next = *pile_b;
-	*pile_b = last;
+	if (!last->content)
+	{
+		last->content = tmp->content;
+		tmp->next = NULL;
+		tmp->content = NULL;
+		last->next = *pile_b;
+		*pile_b = last;
+	}
+	else
+	{
+		tmp->next = NULL;
+		ft_lstadd_front(pile_b, last);
+	}
 	if (mode == 1)
 		ft_printf("rrb\n");
 }
