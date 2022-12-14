@@ -31,6 +31,37 @@ int	checksort(t_list *pile)
 	return 0;
 }
 
+void	normalizer(t_list **pile, char **numbers)
+{
+	t_list	*tmp;
+	int min;
+	int i;
+
+	tmp = *pile;
+	i = 0;
+	while (numbers[i++])
+	{
+		min = 2147483647;
+		while (tmp)
+		{
+			if (*(int *)tmp->content <= min && tmp->index == 0)
+				min = *(int *)tmp->content;
+			if (!tmp->next)
+				break ;
+			tmp = tmp->next;
+		}
+		tmp = *pile;
+		while (*(int *)tmp->content != min && tmp)
+		{
+			if (!tmp->next)
+				break ;
+			tmp = tmp->next;
+		}
+		tmp->index = i;
+		tmp = *pile;
+	}
+}
+
 void	sort_sale(t_list **pile_a, t_list **pile_b)
 {
 	t_list	*tmp;
@@ -65,7 +96,7 @@ void	sort_sale(t_list **pile_a, t_list **pile_b)
 			if (*((int *)tmp->content) == max)
 				break ;
 			//ft_printf("tmp loop is %d\n", *(int *)tmp->content);
-			revrotate_b(pile_b, 1);	
+			revrotate_b(pile_b, 1);
 		}
 		push_a(pile_a, pile_b);
 		//ft_printf("b is %d\n", *(int *)tmp->content);

@@ -151,6 +151,7 @@ void	parse_arg(t_list **pile_a, char **argv, int argc)
 	}
 	checkdigit(numbers);
 	setlist(pile_a, numbers, index);
+	normalizer(pile_a, numbers);
 }
 
 int	checkdigit(char **str)
@@ -158,7 +159,7 @@ int	checkdigit(char **str)
 	int i;
 	int j;
 
-	i = 0;
+	i = 1;
 	j = 0;
 	while(str[i])
 	{
@@ -182,12 +183,24 @@ int main(int argc, char **argv)
 {
 	t_list *pile_a;
 	t_list *pile_b;
-
+	t_list	*tmp;
 	pile_a = malloc(sizeof(t_list));
 	pile_b = malloc(sizeof(t_list));
 	parse_arg(&pile_a, argv, argc);
+	tmp = pile_a;
+	while (tmp)
+	{
+		ft_printf("index for %d is %d\n", *(int *)tmp->content, tmp->index);
+		tmp = tmp->next;
+	}
 	sort_sale(&pile_a, &pile_b);
-	//printlist(&pile_a, &pile_b);
+	tmp = pile_a;
+	while (tmp)
+	{
+		ft_printf("index for %d is %d\n", *(int *)tmp->content, tmp->index);
+		tmp = tmp->next;
+	}
+	printlist(&pile_a, &pile_b);
 	//ft_printf("END OF EXECUTION\n");
 	return 0;
 }

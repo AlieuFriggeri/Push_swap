@@ -33,5 +33,6 @@ void	setlist(t_list **pile_a, char **numbers, int index);
 void	sort_sale(t_list **pile_a, t_list **pile_b);
 int		checkdigit(char **str);
 int	checksort(t_list *pile);
+void	normalizer(t_list **pile, char **numbers);
 
 #endif
