@@ -12,31 +12,39 @@
 
 #include "../headers/push_swap.h"
 
-void	swap_a(t_list *pile_a, int mode)
+void	swap_a(t_list **pile_a, int mode)
 {
-	void	*tmp;
+	t_list	*tmp;
+	t_list *tmp2;
 
-	tmp = pile_a->content;
-	pile_a->content = pile_a->next->content;
-	pile_a->next->content = tmp;
+	tmp = *pile_a;
+	tmp = tmp->next;
+	tmp2 = *pile_a;
+	tmp2->next = tmp->next;
+	tmp->next = tmp2;
+	*pile_a = tmp;
 	if (mode == 1)
 		ft_printf("sa\n");
 }
 
-void	swap_b(t_list *pile_b, int mode)
+void	swap_b(t_list **pile_b, int mode)
 {
-	void	*tmp;
+	t_list	*tmp;
+	t_list *tmp2;
 
-	tmp = pile_b->content;
-	pile_b->content = pile_b->next->content;
-	pile_b->next->content = tmp;
+	tmp = *pile_b;
+	tmp = tmp->next;
+	tmp2 = *pile_b;
+	tmp2->next = tmp->next;
+	tmp->next = tmp2;
+	*pile_b = tmp;
 	if (mode == 1)
 		ft_printf("sb\n");
 }
 
 void	swap_ab(t_list *pile_a, t_list *pile_b)
 {
-	swap_a(pile_a, 0);
-	swap_b(pile_b, 0);
+	swap_a(&pile_a, 0);
+	swap_b(&pile_b, 0);
 	ft_printf("ss\n");
 }

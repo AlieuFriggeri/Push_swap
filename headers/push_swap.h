@@ -15,8 +15,8 @@
 
 # include "../libft/libft.h"
 
-void	swap_a(t_list *pile_a, int mode);
-void	swap_b(t_list *pile_b, int mode);
+void	swap_a(t_list **pile_a, int mode);
+void	swap_b(t_list **pile_b, int mode);
 void	push_a(t_list **pile_a, t_list **pile_b);
 void	push_b(t_list **pile_b, t_list **pile_a);
 void	rotate_a(t_list **pile_a, int mode);
@@ -34,5 +34,15 @@ void	sort_sale(t_list **pile_a, t_list **pile_b);
 int		checkdigit(char **str);
 int	checksort(t_list *pile);
 void	normalizer(t_list **pile, char **numbers);
+void	normalizer2(t_list **pile, char **numbers);
+void	sorttest(t_list **pa, t_list **pb);
+int	findpos(t_list **pile, int tofind);
+void	sortk(t_list **pa, t_list **pb);
+int	midvalue(t_list *p);
+int findbig(t_list **p);
+int findsmall(t_list **p);
+int	bestmove(t_list **p, int tofind);
+int movecalc(t_list **p, int tofind);
+//int	checknbr(char str, int index);
 
 #endif

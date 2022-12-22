@@ -44,7 +44,7 @@ LIBS = ${FT_LNK}
 # ${NAME}: title ${LIBFT} ${MLX} ${OBJS}
 ${NAME}: ${LIBFT} ${MLX} ${OBJS}
 	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: $(NAME) Objects were created${GREY}"
-	${CC} ${OBJS} ${LIBS} -o ${NAME}
+	${CC}  ${OBJS} ${LIBS} -o ${NAME}
 	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: $(NAME) created !"
 
 title:

@@ -40,7 +40,7 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 	t_list *tmp;
 	int i;
 	
-	i = 0;
+	i = 1;
 	if (*pile_a)
 	{
 		tmp = *pile_a;
@@ -48,7 +48,7 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		while(tmp != NULL)
 		{
 			if (tmp->content)
-				ft_printf("%d: {%d}\n", i, *(int *)tmp->content);
+				ft_printf("%d: {%d} [%d]\n", i, *(int *)tmp->content, tmp->index);
 			else
 				ft_printf("%d: {%d}\n", i, tmp->content);
 			if (tmp->next != NULL)
@@ -58,7 +58,7 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 			i++;
 		}
 	}
-	i = 0;
+	i = 1;
 	if(*pile_b)
 	{
 		tmp = *pile_b;
@@ -66,7 +66,7 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		while(tmp != NULL)
 		{
 			if(tmp->content)
-				ft_printf("%d: {%d}\n", i, *(int *)tmp->content);
+				ft_printf("%d: {%d} [%d]\n", i, *(int *)tmp->content, tmp->index);
 			else
 				ft_printf("%d: {%d}\n", i, tmp->content);
 			if (tmp->next != NULL)
@@ -112,7 +112,7 @@ int	checkdouble(char **numbers)
 	int i;
 	int j;
 
-	i = 0;
+	i = 1;
 	j = 0;
 	while(numbers[i])
 	{
@@ -151,7 +151,10 @@ void	parse_arg(t_list **pile_a, char **argv, int argc)
 	}
 	checkdigit(numbers);
 	setlist(pile_a, numbers, index);
+	if (index == 1)
 	normalizer(pile_a, numbers);
+	else
+	normalizer2(pile_a, numbers);
 }
 
 int	checkdigit(char **str)
@@ -179,28 +182,44 @@ int	checkdigit(char **str)
 	return (0);
 }
 
+/* int	checknbr(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '-' && i != 0)
+		{
+			ft_putstr_fd("Error\n" ,2);
+			exit (1);
+		}
+		i++;
+	}
+	return 0;
+} */
+
 int main(int argc, char **argv)
 {
 	t_list *pile_a;
 	t_list *pile_b;
-	t_list	*tmp;
+	//t_list	*tmp;
 	pile_a = malloc(sizeof(t_list));
-	pile_b = malloc(sizeof(t_list));
+	pile_b = NULL;
 	parse_arg(&pile_a, argv, argc);
-	tmp = pile_a;
-	while (tmp)
+	sortk(&pile_a, &pile_b);
+ 	//tmp = pile_a;
+/*  	while (tmp)
+	{
+		ft_printf("index for %d is %d and his pos is%d\n", *(int *)tmp->content, tmp->index, findpos(&pile_a, tmp));
+		tmp = tmp->next;
+	} */
+/* 	while (tmp)
 	{
 		ft_printf("index for %d is %d\n", *(int *)tmp->content, tmp->index);
 		tmp = tmp->next;
-	}
-	sort_sale(&pile_a, &pile_b);
-	tmp = pile_a;
-	while (tmp)
-	{
-		ft_printf("index for %d is %d\n", *(int *)tmp->content, tmp->index);
-		tmp = tmp->next;
-	}
-	printlist(&pile_a, &pile_b);
+	} */
+	//printlist(&pile_a, &pile_b);
 	//ft_printf("END OF EXECUTION\n");
 	return 0;
 }

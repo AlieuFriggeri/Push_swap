@@ -46,7 +46,6 @@ void	rotate_b(t_list **pile_b, int mode)
 	{
 		last->content = tmp->content;
 		last->next = NULL;
-		//ft_printf("last content is %d\n", last->content);
 	}
 	else
 		last->next = tmp;
