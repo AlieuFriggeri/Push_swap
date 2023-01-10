@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kistod <kistod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 18:05:54 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/08 12:30:50 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:58:26 by kistod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rotate_a(t_list **pile_a, int mode)
 {
-	t_list *tmp;
-	t_list *last;
+	t_list	*tmp;
+	t_list	*last;
 
 	tmp = *pile_a;
 	*pile_a = tmp->next;
@@ -25,7 +25,6 @@ void	rotate_a(t_list **pile_a, int mode)
 	{
 		last->content = tmp->content;
 		last->next = NULL;
-		//ft_printf("last content is %d\n", last->content);
 	}
 	else
 		last->next = tmp;
@@ -35,8 +34,8 @@ void	rotate_a(t_list **pile_a, int mode)
 
 void	rotate_b(t_list **pile_b, int mode)
 {
-	t_list *tmp;
-	t_list *last;
+	t_list	*tmp;
+	t_list	*last;
 
 	tmp = *pile_b;
 	*pile_b = tmp->next;
@@ -55,8 +54,8 @@ void	rotate_b(t_list **pile_b, int mode)
 
 void	revrotate_a(t_list **pile_a, int mode)
 {
-	t_list *tmp;
-	t_list *last;
+	t_list	*tmp;
+	t_list	*last;
 
 	tmp = *pile_a;
 	last = ft_lstlast(*pile_a);
@@ -80,8 +79,8 @@ void	revrotate_a(t_list **pile_a, int mode)
 
 void	revrotate_b(t_list **pile_b, int mode)
 {
-	t_list *tmp;
-	t_list *last;
+	t_list	*tmp;
+	t_list	*last;
 
 	tmp = *pile_b;
 	last = ft_lstlast(*pile_b);
@@ -102,18 +101,4 @@ void	revrotate_b(t_list **pile_b, int mode)
 	}
 	if (mode == 1)
 		ft_printf("rrb\n");
-}
-
-void	rotate_ab(t_list **pile_a, t_list **pile_b)
-{
-	rotate_a(pile_a, 0);
-	rotate_b(pile_b, 0);
-	ft_printf("rr\n");
-}
-
-void	revrotate_ab(t_list **pile_a, t_list **pile_b)
-{
-	revrotate_a(pile_a, 0);
-	revrotate_b(pile_b, 0);
-	ft_printf("rrr\n");
 }

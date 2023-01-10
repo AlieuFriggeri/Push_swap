@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+         #
+#    By: kistod <kistod@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 18:49:40 by vgroux            #+#    #+#              #
-#    Updated: 2022/12/06 19:28:47 by vgroux           ###   ########.fr        #
+#    Updated: 2023/01/10 15:55:31 by kistod           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ DIR_S =	srcs/
 CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
-SRCS_LIST =	push_swap.c sort.c push.c rotate.c swap.c sort_utils.c sort_utils2.c sort_utils3.c
+SRCS_LIST =	push_swap.c sort.c push.c rotate.c swap.c sort_utils.c sort_utils2.c sort_utils3.c revrotate.c
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 

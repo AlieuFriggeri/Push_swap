@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kistod <kistod@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 15:50:48 by kistod            #+#    #+#             */
+/*   Updated: 2023/01/10 15:54:25 by kistod           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/push_swap.h"
 
 int	findpos(t_list **pile, int tofind)
@@ -29,7 +41,7 @@ int	bestmove(t_list **p, int tofind)
 	if (findpos(p, tmp->index) >= ft_lstsize(*p) / 2)
 		return (1);
 	else
-		return (0);	
+		return (0);
 }
 
 int	movecalc(t_list **p, int tofind)

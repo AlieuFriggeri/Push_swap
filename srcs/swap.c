@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kistod <kistod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:27:52 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/07 13:23:38 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:52:28 by kistod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	swap_a(t_list **pile_a, int mode)
 {
 	t_list	*tmp;
-	t_list *tmp2;
+	t_list	*tmp2;
 
 	tmp = *pile_a;
 	tmp = tmp->next;
@@ -30,7 +30,7 @@ void	swap_a(t_list **pile_a, int mode)
 void	swap_b(t_list **pile_b, int mode)
 {
 	t_list	*tmp;
-	t_list *tmp2;
+	t_list	*tmp2;
 
 	tmp = *pile_b;
 	tmp = tmp->next;
