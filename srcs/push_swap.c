@@ -203,23 +203,16 @@ int main(int argc, char **argv)
 {
 	t_list *pile_a;
 	t_list *pile_b;
-	//t_list	*tmp;
+
 	pile_a = malloc(sizeof(t_list));
 	pile_b = NULL;
 	parse_arg(&pile_a, argv, argc);
-	sortk(&pile_a, &pile_b);
- 	//tmp = pile_a;
-/*  	while (tmp)
-	{
-		ft_printf("index for %d is %d and his pos is%d\n", *(int *)tmp->content, tmp->index, findpos(&pile_a, tmp));
-		tmp = tmp->next;
-	} */
-/* 	while (tmp)
-	{
-		ft_printf("index for %d is %d\n", *(int *)tmp->content, tmp->index);
-		tmp = tmp->next;
-	} */
-	//printlist(&pile_a, &pile_b);
-	//ft_printf("END OF EXECUTION\n");
+	if (ft_lstsize(pile_a) == 3)
+		sort3(&pile_a, 3);
+	else if (ft_lstsize(pile_a) == 5)
+		sort5(&pile_a, &pile_b);
+	else if (ft_lstsize(pile_a) >= 100)
+		sortk(&pile_a, &pile_b);
+
 	return 0;
 }

@@ -27,7 +27,7 @@ DIR_S =	srcs/
 CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
-SRCS_LIST =	push_swap.c sort.c push.c rotate.c swap.c
+SRCS_LIST =	push_swap.c sort.c push.c rotate.c swap.c sort_utils.c sort_utils2.c sort_utils3.c
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
