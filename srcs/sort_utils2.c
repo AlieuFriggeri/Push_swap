@@ -2,9 +2,9 @@
 
 int	checksort(t_list *pile)
 {
-	int i;
-	int j;
-	t_list *tmp;
+	int		i;
+	int		j;
+	t_list	*tmp;
 
 	tmp = pile;
 	j = 0;
@@ -12,18 +12,18 @@ int	checksort(t_list *pile)
 	{
 		i = *(int *)tmp->content;
 		if (i < j)
-			return 1;
+			return (1);
 		j = i;
 		tmp = tmp->next;
 	}
-	return 0;
+	return (0);
 }
 
 void	normalizer(t_list **pile, char **numbers)
 {
 	t_list	*tmp;
-	int min;
-	int i;
+	int		min;
+	int		i;
 
 	tmp = *pile;
 	i = 0;
@@ -50,8 +50,8 @@ void	normalizer(t_list **pile, char **numbers)
 void	normalizer2(t_list **pile, char **numbers)
 {
 	t_list	*tmp;
-	int min;
-	int i;
+	int		min;
+	int		i;
 
 	tmp = *pile;
 	i = 0;

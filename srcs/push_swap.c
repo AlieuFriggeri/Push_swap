@@ -14,28 +14,18 @@
 
 void	delete(void *root)
 {
-	t_list *tmp;
-	t_list *tmp2;
+	t_list	*tmp;
+	t_list	*tmp2;
 
 	if (root == NULL)
-		return;
+		return ;
 	tmp = root;
 	tmp2 = root;
 	root = tmp->next;
 	free(tmp2);
-	// tmp = *root;
-	// 	while (tmp->content != value)
-	// 	{
-	// 		if (tmp->next->content == value)
-	// 			prev = tmp;
-	// 		tmp = tmp->next;
-	// 	}
-	// 	prev->next = tmp->next;
-	// 	tmp->content = NULL;
-	// 	tmp->next = NULL;
 }
 
-void	printlist(t_list **pile_a, t_list **pile_b)
+/* void	printlist(t_list **pile_a, t_list **pile_b)
 {
 	t_list *tmp;
 	int i;
@@ -77,7 +67,7 @@ void	printlist(t_list **pile_a, t_list **pile_b)
 		}
 	}
 	ft_printf("[END OF LIST]\n");
-}
+} */
 
 void	setlist(t_list **pile_a, char **numbers, int index)
 {
@@ -87,16 +77,16 @@ void	setlist(t_list **pile_a, char **numbers, int index)
 
 	tmp = *pile_a;
 	i = index;
-	while(numbers[i])
+	while (numbers[i])
 	{
 		nb = ft_atoi(numbers[i]);
-		if (checkdouble(numbers) == 1 ||
-			ft_strncmp(ft_itoa(nb), numbers[i], ft_strlen(ft_itoa(nb))) != 0)
-			{
-				ft_putstr_fd("Error\n", 2);
-				ft_lstclear(pile_a, &delete);
-				exit(1);
-			}
+		if (checkdouble(numbers) == 1
+			|| ft_strncmp(ft_itoa(nb), numbers[i], ft_strlen(ft_itoa(nb))) != 0)
+		{
+			ft_putstr_fd("Error\n", 2);
+			ft_lstclear(pile_a, &delete);
+			exit(1);
+		}
 		tmp->content = malloc(sizeof(int));
 		*((int *)tmp->content) = nb;
 		if (numbers[i + 1])
@@ -109,12 +99,12 @@ void	setlist(t_list **pile_a, char **numbers, int index)
 
 int	checkdouble(char **numbers)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;
-	while(numbers[i])
+	while (numbers[i])
 	{
 		while (numbers[j])
 		{
@@ -131,8 +121,8 @@ int	checkdouble(char **numbers)
 
 void	parse_arg(t_list **pile_a, char **argv, int argc)
 {
-	char **numbers;
-	int index;
+	char	**numbers;
+	int		index;
 
 	if (argc <= 1)
 	{
@@ -151,58 +141,13 @@ void	parse_arg(t_list **pile_a, char **argv, int argc)
 	}
 	checkdigit(numbers);
 	setlist(pile_a, numbers, index);
-	if (index == 1)
-	normalizer(pile_a, numbers);
-	else
-	normalizer2(pile_a, numbers);
+	ft_scandale(pile_a, numbers, index);
 }
 
-int	checkdigit(char **str)
+int	main(int argc, char **argv)
 {
-	int i;
-	int j;
-
-	i = 1;
-	j = 0;
-	while(str[i])
-	{
-		while (str[i][j])
-		{
-			if (ft_isdigit(str[i][j]) == 1 || (str[i][j] == '-' && j == 0))
-				j++;
-			else
-			{
-				ft_putstr_fd("Error\n" ,2);
-				exit (1);
-			}
-		}
-		j = 0;
-		i++;
-	}
-	return (0);
-}
-
-/* int	checknbr(char *str)
-{
-	int i;
-
-	i = 0;
-	while(str[i])
-	{
-		if (str[i] == '-' && i != 0)
-		{
-			ft_putstr_fd("Error\n" ,2);
-			exit (1);
-		}
-		i++;
-	}
-	return 0;
-} */
-
-int main(int argc, char **argv)
-{
-	t_list *pile_a;
-	t_list *pile_b;
+	t_list	*pile_a;
+	t_list	*pile_b;
 
 	pile_a = malloc(sizeof(t_list));
 	pile_b = NULL;
@@ -213,6 +158,7 @@ int main(int argc, char **argv)
 		sort5(&pile_a, &pile_b);
 	else if (ft_lstsize(pile_a) >= 100)
 		sortk(&pile_a, &pile_b);
-
-	return 0;
+	delete(pile_a);
+	delete(pile_b);
+	return (0);
 }

@@ -1,9 +1,9 @@
 #include "../headers/push_swap.h"
 
-int	findpos(t_list **pile, int	tofind)
+int	findpos(t_list **pile, int tofind)
 {
 	t_list	*tmp;
-	int i;
+	int		i;
 
 	i = 1;
 	tmp = *pile;
@@ -17,7 +17,7 @@ int	findpos(t_list **pile, int	tofind)
 
 int	bestmove(t_list **p, int tofind)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = *p;
 	while (tmp)
@@ -30,11 +30,11 @@ int	bestmove(t_list **p, int tofind)
 		return (1);
 	else
 		return (0);	
-} 
+}
 
-int movecalc(t_list **p, int tofind)
+int	movecalc(t_list **p, int tofind)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = *p;
 	while (tmp)
@@ -47,13 +47,13 @@ int movecalc(t_list **p, int tofind)
 		return (ft_lstsize(*p) - findpos(p, tmp->index) + 1);
 	else if (findpos(p, tmp->index) <= ft_lstsize(*p) / 2)
 		return (findpos(p, tmp->index) - 1);
-	return 0;
+	return (0);
 }
 
-int findbig(t_list **p)
+int	findbig(t_list **p)
 {
-	int max;
-	t_list *tmp;
+	int		max;
+	t_list	*tmp;
 
 	tmp = *p;
 	max = 0;
@@ -63,13 +63,13 @@ int findbig(t_list **p)
 			max = tmp->index;
 		tmp = tmp->next;
 	}
-	return max;
+	return (max);
 }
 
-int findsmall(t_list **p)
+int	findsmall(t_list **p)
 {
-	int min;
-	t_list *tmp;
+	int		min;
+	t_list	*tmp;
 
 	tmp = *p;
 	min = tmp->index;
@@ -79,5 +79,5 @@ int findsmall(t_list **p)
 			min = tmp->index;
 		tmp = tmp->next;
 	}
-	return min;
+	return (min);
 }

@@ -14,8 +14,8 @@
 
 void	sortk(t_list **pa, t_list **pb)
 {
-	t_list *tmp;
-	int mid;
+	t_list	*tmp;
+	int		mid;
 	
 	tmp = *pa;
 	while (ft_lstsize(*pa) > 1)
@@ -36,11 +36,11 @@ void	sortk(t_list **pa, t_list **pb)
 			sortk2b(pa, pb);
 	}
 	sortkfinal(pa);
-} 
+}
 
 void	sort3(t_list **p, int nbnb)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = *p;
 	if (tmp->index == nbnb)
@@ -54,10 +54,11 @@ void	sort3(t_list **p, int nbnb)
 
 void	sort5(t_list **pa, t_list **pb)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	while (ft_lstsize(*pa) != 3)
-	{	tmp = *pa;
+	{	
+		tmp = *pa;
 		if (tmp->index == 1 || tmp->index == 2)
 			push_b(pb, pa);
 		else
