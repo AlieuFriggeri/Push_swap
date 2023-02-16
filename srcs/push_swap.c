@@ -6,23 +6,54 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2022/12/08 15:10:31 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:52:01 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	delete(void *root)
+void	delete(t_list *root)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
 
-	if (root == NULL)
-		return ;
 	tmp = root;
 	tmp2 = root;
-	root = tmp->next;
-	free(tmp2);
+	if (tmp->next != NULL)
+	{//ft_printf("salut\n");
+		//ft_printf("%d\n", tmp->next->index);
+		
+	tmp = tmp->next;
+	while(tmp)
+	{
+		free(tmp2->bot);
+		tmp2->bot = NULL;
+		free(tmp2->content);
+		tmp2->content = NULL;
+		//tmp2->index = NULL;
+		free(tmp2->top);
+		tmp2->top = NULL;
+		free(tmp2);
+		if (tmp->next == NULL)
+			break;
+		tmp2 = tmp;
+			//ft_printf("salut\n");
+		tmp = tmp->next;
+			//ft_printf("salut2\n");
+	}
+	}
+	//ft_printf("salut3\n");
+	free(tmp->bot);
+	tmp->bot = NULL;
+	free(tmp->content);
+	tmp2->content = NULL;
+	//tmp->index = NULL;
+	free(tmp->top);
+	tmp2->top = NULL;
+	free(tmp);
+	tmp = NULL;
+	//free(tmp2);
+	tmp2 = NULL;
 }
 
 /* void	printlist(t_list **pile_a, t_list **pile_b)
@@ -84,7 +115,7 @@ void	setlist(t_list **pile_a, char **numbers, int index)
 			|| ft_strncmp(ft_itoa(nb), numbers[i], ft_strlen(ft_itoa(nb))) != 0)
 		{
 			ft_putstr_fd("Error\n", 2);
-			ft_lstclear(pile_a, &delete);
+			delete(*pile_a);
 			exit(1);
 		}
 		tmp->content = malloc(sizeof(int));
@@ -156,9 +187,13 @@ int	main(int argc, char **argv)
 		sort3(&pile_a, 3);
 	else if (ft_lstsize(pile_a) == 5)
 		sort5(&pile_a, &pile_b);
-	else if (ft_lstsize(pile_a) >= 100)
+	else if (ft_lstsize(pile_a) > 5)
 		sortk(&pile_a, &pile_b);
+
 	delete(pile_a);
-	delete(pile_b);
+	pile_a = NULL;
+	//ft_printf("%d\n", pile_a->index);
+	free(pile_a);
+	free(pile_b);
 	return (0);
 }
