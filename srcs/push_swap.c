@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/16 16:52:01 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:05:35 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	delete(t_list *root)
 	if (tmp->next != NULL)
 	{//ft_printf("salut\n");
 		//ft_printf("%d\n", tmp->next->index);
-		
 	tmp = tmp->next;
 	while(tmp)
 	{
@@ -46,7 +45,9 @@ void	delete(t_list *root)
 	free(tmp->bot);
 	tmp->bot = NULL;
 	free(tmp->content);
-	tmp2->content = NULL;
+	tmp->content = NULL;
+	//free(tmp2->content);
+	//tmp2->content = NULL;
 	//tmp->index = NULL;
 	free(tmp->top);
 	tmp2->top = NULL;
@@ -100,22 +101,27 @@ void	delete(t_list *root)
 	ft_printf("[END OF LIST]\n");
 } */
 
-void	setlist(t_list **pile_a, char **numbers, int index)
+void	setlist(t_list **pile_a, t_list **pile_b, char **numbers, int index)
 {
 	t_list	*tmp;
 	int		nb;
 	int		i;
+	char	*itoa;
 
 	tmp = *pile_a;
 	i = index;
 	while (numbers[i])
 	{
 		nb = ft_atoi(numbers[i]);
-		if (checkdouble(numbers) == 1
-			|| ft_strncmp(ft_itoa(nb), numbers[i], ft_strlen(ft_itoa(nb))) != 0)
+		itoa = ft_itoa(nb);
+		ft_printf("%d || %s\n", nb, numbers[i]);
+		if ((checkdouble(numbers)) == 1 || (nb != INT32_MAX && ft_strncmp(numbers[i], "2147483647", ft_strlen(numbers[i])) != 0) || (nb == INT32_MIN && ft_strncmp(numbers[i], "2147483647", ft_strlen(numbers[i])) != 0))
 		{
-			ft_putstr_fd("Error\n", 2);
 			delete(*pile_a);
+			*pile_a = NULL;
+			free(*pile_b);
+			pile_b = NULL;
+			ft_putstr_fd("Error\n", 2);
 			exit(1);
 		}
 		tmp->content = malloc(sizeof(int));
@@ -124,6 +130,7 @@ void	setlist(t_list **pile_a, char **numbers, int index)
 			tmp->next = ft_lstnew(0);
 		tmp = tmp->next;
 		i++;
+		free(itoa);
 	}
 	tmp = NULL;
 }
@@ -138,9 +145,9 @@ int	checkdouble(char **numbers)
 	while (numbers[i])
 	{
 		while (numbers[j])
-		{
-			if (ft_strncmp(numbers[j], numbers[i], ft_strlen(numbers[i])) == 0
-				&& j != i && ft_strlen(numbers[i]) == ft_strlen(numbers[j]))
+		{//ft_printf("%s %d|| %s %d\n", numbers[i], i, numbers[j], j);
+			if ((j != i && ft_atoi(numbers[j]) == ft_atoi(numbers[i])
+				&& ft_strncmp(numbers[j], "./push_swap", 12) != 0))
 				return (1);
 			j++;
 		}
@@ -150,7 +157,7 @@ int	checkdouble(char **numbers)
 	return (0);
 }
 
-void	parse_arg(t_list **pile_a, char **argv, int argc)
+void	parse_arg(t_list **pile_a, t_list **pile_b, char **argv, int argc)
 {
 	char	**numbers;
 	int		index;
@@ -158,11 +165,17 @@ void	parse_arg(t_list **pile_a, char **argv, int argc)
 	if (argc <= 1)
 	{
 		ft_putstr_fd("Error\n", 2);
+		delete(*pile_a);
+		*pile_a = NULL;
+		free(*pile_a);
+		free(*pile_b);
 		exit(1);
 	}
 	else if (argc == 2)
 	{
 		numbers = ft_split(argv[1], ' ');
+		// if (!numbers[1])
+		// 	exit(1);
 		index = 0;
 	}
 	else
@@ -170,8 +183,8 @@ void	parse_arg(t_list **pile_a, char **argv, int argc)
 		numbers = argv;
 		index = 1;
 	}
-	checkdigit(numbers);
-	setlist(pile_a, numbers, index);
+	checkdigit(numbers, pile_a, pile_b, index);
+	setlist(pile_a, pile_b, numbers, index);
 	ft_scandale(pile_a, numbers, index);
 }
 
@@ -182,18 +195,17 @@ int	main(int argc, char **argv)
 
 	pile_a = malloc(sizeof(t_list));
 	pile_b = NULL;
-	parse_arg(&pile_a, argv, argc);
+	parse_arg(&pile_a, &pile_b, argv, argc);
 	if (ft_lstsize(pile_a) == 3)
 		sort3(&pile_a, 3);
 	else if (ft_lstsize(pile_a) == 5)
 		sort5(&pile_a, &pile_b);
 	else if (ft_lstsize(pile_a) > 5)
 		sortk(&pile_a, &pile_b);
-
 	delete(pile_a);
 	pile_a = NULL;
-	//ft_printf("%d\n", pile_a->index);
 	free(pile_a);
 	free(pile_b);
+	pile_b = NULL;
 	return (0);
 }

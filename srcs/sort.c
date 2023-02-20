@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kistod <kistod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:09:00 by afrigger          #+#    #+#             */
-/*   Updated: 2023/01/10 15:51:30 by kistod           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:59:37 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	sortk(t_list **pa, t_list **pb)
 	t_list	*tmp;
 	int		mid;
 
-	tmp = *pa;
+	if (checksort(*pa) == 0)
+		return;
 	while (ft_lstsize(*pa) > 1)
 	{
 		tmp = *pa;
@@ -56,6 +57,8 @@ void	sort5(t_list **pa, t_list **pb)
 {
 	t_list	*tmp;
 
+	if (checksort(*pa) == 0)
+		return;
 	while (ft_lstsize(*pa) != 3)
 	{	
 		tmp = *pa;
