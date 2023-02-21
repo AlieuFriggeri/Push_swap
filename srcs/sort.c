@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 13:09:00 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/20 13:59:37 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:38:02 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sortk(t_list **pa, t_list **pb)
 	int		mid;
 
 	if (checksort(*pa) == 0)
-		return;
+		return ;
 	while (ft_lstsize(*pa) > 1)
 	{
 		tmp = *pa;
@@ -58,7 +58,7 @@ void	sort5(t_list **pa, t_list **pb)
 	t_list	*tmp;
 
 	if (checksort(*pa) == 0)
-		return;
+		return ;
 	while (ft_lstsize(*pa) != 3)
 	{	
 		tmp = *pa;
@@ -134,3 +134,43 @@ while ( lstsize(pa) > 1)
 	while (pa->top != smaller)
 		revrotate_a;
 } */
+
+int	checkval(char **numbers, int index)
+{
+	int		nb;
+	char	*itoa;
+	int		i;
+
+	i = index;
+	nb = ft_atoi(numbers[i]);
+	itoa = ft_itoa(nb);
+	if (checkdouble(numbers) == 1)
+	{
+		free(itoa);
+		return (1);
+	}
+	else if (ft_strncmp(numbers[i], itoa, ft_strlen(numbers[i])) != 0
+		|| ft_strlen(itoa) != ft_strlen(numbers[i]))
+	{
+		free(itoa);
+		return (1);
+	}
+	else
+	{
+		free(itoa);
+		return (0);
+	}
+}
+
+void	deletepart2(t_list *tmp, t_list *tmp2)
+{
+	free(tmp->bot);
+	tmp->bot = NULL;
+	free(tmp->content);
+	tmp->content = NULL;
+	free(tmp->top);
+	tmp2->top = NULL;
+	free(tmp);
+	tmp = NULL;
+	tmp2 = NULL;
+}

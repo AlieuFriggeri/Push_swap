@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:39 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/20 11:44:43 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:24:02 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	rotate_ab(t_list **pile_a, t_list **pile_b);
 void	revrotate_ab(t_list **pile_a, t_list **pile_b);
 void	printlist(t_list **pile_a, t_list **pile_b);
 void	delete(t_list *root);
+void	deletepart2(t_list *tmp, t_list *tmp2);
+void	error(t_list **pile_a, t_list **pile_b);
 void	parse_arg(t_list **pile_a, t_list **pile_b, char **argv, int argc);
 int		checkdouble(char **numbers);
+int		checkval(char **numbers, int index);
 void	setlist(t_list **pile_a, t_list **pile_b, char **numbers, int index);
 void	sort_sale(t_list **pile_a, t_list **pile_b);
 int		checkdigit(char **str, t_list **pile_a, t_list **pile_b, int index);

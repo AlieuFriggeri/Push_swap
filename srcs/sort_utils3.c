@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:51:17 by kistod            #+#    #+#             */
-/*   Updated: 2023/02/20 12:27:54 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:32:35 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,11 @@ int	checkdigit(char **str, t_list **pile_a, t_list **pile_b, int index)
 	{
 		while (str[i][j])
 		{
-			if (ft_isdigit(str[i][j]) == 1 || (str[i][j] == '-' && j == 0) || (str[i][j] == '+' && j == 0))
+			if (ft_isdigit(str[i][j]) == 1
+				|| (str[i][j] == '-' && j == 0) || (str[i][j] == '+' && j == 0))
 				j++;
 			else
-			{
-				ft_putstr_fd("Error\n", 2);
-				delete(*pile_a);
-				*pile_a = NULL;
-				free(*pile_a);
-				free(*pile_b);
-				exit (1);
-			}
+				error(pile_a, pile_b);
 		}
 		j = 0;
 		i++;
@@ -118,8 +112,19 @@ int	checkdigit(char **str, t_list **pile_a, t_list **pile_b, int index)
 
 void	ft_scandale(t_list **pa, char **numbers, int index)
 {
+	int	i;
+
+	i = 0;
 	if (index == 1)
 		normalizer(pa, numbers);
 	else
+	{
 		normalizer2(pa, numbers);
+		while (numbers[i])
+		{
+			free(numbers[i]);
+			i++;
+		}
+		free(numbers);
+	}
 }

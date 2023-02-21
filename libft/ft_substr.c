@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:04:34 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/20 11:16:22 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:23:36 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*res;
-	//size_t	i;
 
 	if (!s)
 		return (NULL);
-	//i = 0;
 	if (start >= ft_strlen(s))
 	{
 		res = malloc(1);

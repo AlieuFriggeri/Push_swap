@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/20 16:05:35 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:36:52 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,24 @@ void	delete(t_list *root)
 	tmp = root;
 	tmp2 = root;
 	if (tmp->next != NULL)
-	{//ft_printf("salut\n");
-		//ft_printf("%d\n", tmp->next->index);
-	tmp = tmp->next;
-	while(tmp)
 	{
-		free(tmp2->bot);
-		tmp2->bot = NULL;
-		free(tmp2->content);
-		tmp2->content = NULL;
-		//tmp2->index = NULL;
-		free(tmp2->top);
-		tmp2->top = NULL;
-		free(tmp2);
-		if (tmp->next == NULL)
-			break;
-		tmp2 = tmp;
-			//ft_printf("salut\n");
 		tmp = tmp->next;
-			//ft_printf("salut2\n");
+		while (tmp)
+		{
+			free(tmp2->bot);
+			tmp2->bot = NULL;
+			free(tmp2->content);
+			tmp2->content = NULL;
+			free(tmp2->top);
+			tmp2->top = NULL;
+			free(tmp2);
+			if (tmp->next == NULL)
+				break ;
+			tmp2 = tmp;
+			tmp = tmp->next;
+		}
 	}
-	}
-	//ft_printf("salut3\n");
-	free(tmp->bot);
-	tmp->bot = NULL;
-	free(tmp->content);
-	tmp->content = NULL;
-	//free(tmp2->content);
-	//tmp2->content = NULL;
-	//tmp->index = NULL;
-	free(tmp->top);
-	tmp2->top = NULL;
-	free(tmp);
-	tmp = NULL;
-	//free(tmp2);
-	tmp2 = NULL;
+	deletepart2(tmp, tmp2);
 }
 
 /* void	printlist(t_list **pile_a, t_list **pile_b)
@@ -114,16 +97,8 @@ void	setlist(t_list **pile_a, t_list **pile_b, char **numbers, int index)
 	{
 		nb = ft_atoi(numbers[i]);
 		itoa = ft_itoa(nb);
-		ft_printf("%d || %s\n", nb, numbers[i]);
-		if ((checkdouble(numbers)) == 1 || (nb != INT32_MAX && ft_strncmp(numbers[i], "2147483647", ft_strlen(numbers[i])) != 0) || (nb == INT32_MIN && ft_strncmp(numbers[i], "2147483647", ft_strlen(numbers[i])) != 0))
-		{
-			delete(*pile_a);
-			*pile_a = NULL;
-			free(*pile_b);
-			pile_b = NULL;
-			ft_putstr_fd("Error\n", 2);
-			exit(1);
-		}
+		if (checkval(numbers, i) == 1)
+			error(pile_a, pile_b);
 		tmp->content = malloc(sizeof(int));
 		*((int *)tmp->content) = nb;
 		if (numbers[i + 1])
@@ -145,9 +120,9 @@ int	checkdouble(char **numbers)
 	while (numbers[i])
 	{
 		while (numbers[j])
-		{//ft_printf("%s %d|| %s %d\n", numbers[i], i, numbers[j], j);
+		{
 			if ((j != i && ft_atoi(numbers[j]) == ft_atoi(numbers[i])
-				&& ft_strncmp(numbers[j], "./push_swap", 12) != 0))
+					&& ft_strncmp(numbers[j], "./push_swap", 12) != 0))
 				return (1);
 			j++;
 		}
@@ -164,18 +139,13 @@ void	parse_arg(t_list **pile_a, t_list **pile_b, char **argv, int argc)
 
 	if (argc <= 1)
 	{
-		ft_putstr_fd("Error\n", 2);
-		delete(*pile_a);
-		*pile_a = NULL;
-		free(*pile_a);
-		free(*pile_b);
-		exit(1);
+		error(pile_a, pile_b);
+		index = 0;
+		numbers = NULL;
 	}
 	else if (argc == 2)
 	{
 		numbers = ft_split(argv[1], ' ');
-		// if (!numbers[1])
-		// 	exit(1);
 		index = 0;
 	}
 	else
