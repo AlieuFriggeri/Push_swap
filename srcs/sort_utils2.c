@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kistod <kistod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:51:02 by kistod            #+#    #+#             */
-/*   Updated: 2023/01/10 15:51:22 by kistod           ###   ########.fr       */
+/*   Updated: 2023/02/22 13:02:23 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	checksort(t_list *pile)
 	t_list	*tmp;
 
 	tmp = pile;
-	j = 0;
+	j = INT32_MIN;
 	while (tmp != NULL)
 	{
 		i = *(int *)tmp->content;
