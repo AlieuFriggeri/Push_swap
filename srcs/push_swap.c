@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/24 11:21:32 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:16:08 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,13 +168,14 @@ int	main(int argc, char **argv)
 	pile_a = malloc(sizeof(t_list));
 	pile_b = NULL;
 	parse_arg(&pile_a, &pile_b, argv, argc);
-	// if (ft_lstsize(pile_a) == 3)
-	// 	sort3(&pile_a, 3);
-	// else if (ft_lstsize(pile_a) == 5)
-	// 	sort5(&pile_a, &pile_b);
-	// else if (ft_lstsize(pile_a) > 5 || ft_lstsize(pile_a) == 4)
-	// 	sortk(&pile_a, &pile_b);
-	indexToBinary(&pile_a, bitmax(500));
+	if (ft_lstsize(pile_a) == 3)
+		sort3(&pile_a, 3);
+	else if (ft_lstsize(pile_a) == 5)
+		sort5(&pile_a, &pile_b);
+	else if (ft_lstsize(pile_a) == 100 && checksort(pile_a) != 0)
+		sortk(&pile_a, &pile_b);
+	else if (ft_lstsize(pile_a) > 100 && checksort(pile_a) != 0)
+		radix_sort(&pile_a, &pile_b, bitmax(ft_lstsize(pile_a)));
 	delete(pile_a);
 	pile_a = NULL;
 	free(pile_a);
