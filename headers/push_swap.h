@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:39 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/21 11:24:02 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:21:22 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int		findsmall(t_list **p);
 int		bestmove(t_list **p, int tofind);
 int		movecalc(t_list **p, int tofind);
 void	ft_scandale(t_list **pa, char **numbers, int index);
+void	indexToBinary(t_list **pa, int bitmax);
+int		bitmax(int maxnb);
 //int	checknbr(char str, int index);
 
 #endif

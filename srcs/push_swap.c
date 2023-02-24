@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:10:26 by afrigger          #+#    #+#             */
-/*   Updated: 2023/02/21 11:36:52 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:21:32 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,15 +163,18 @@ int	main(int argc, char **argv)
 	t_list	*pile_a;
 	t_list	*pile_b;
 
+	if (!argv[1])
+		exit(1);
 	pile_a = malloc(sizeof(t_list));
 	pile_b = NULL;
 	parse_arg(&pile_a, &pile_b, argv, argc);
-	if (ft_lstsize(pile_a) == 3)
-		sort3(&pile_a, 3);
-	else if (ft_lstsize(pile_a) == 5)
-		sort5(&pile_a, &pile_b);
-	else if (ft_lstsize(pile_a) > 5)
-		sortk(&pile_a, &pile_b);
+	// if (ft_lstsize(pile_a) == 3)
+	// 	sort3(&pile_a, 3);
+	// else if (ft_lstsize(pile_a) == 5)
+	// 	sort5(&pile_a, &pile_b);
+	// else if (ft_lstsize(pile_a) > 5 || ft_lstsize(pile_a) == 4)
+	// 	sortk(&pile_a, &pile_b);
+	indexToBinary(&pile_a, bitmax(500));
 	delete(pile_a);
 	pile_a = NULL;
 	free(pile_a);

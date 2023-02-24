@@ -6,7 +6,7 @@
 #    By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 18:49:40 by vgroux            #+#    #+#              #
-#    Updated: 2023/02/21 11:25:21 by afrigger         ###   ########.fr        #
+#    Updated: 2023/02/24 11:09:50 by afrigger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
 SRCS_LIST =	push_swap.c sort.c push.c rotate.c swap.c sort_utils.c \
-sort_utils2.c sort_utils3.c revrotate.c error.c
+sort_utils2.c sort_utils3.c revrotate.c error.c radix.c
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
